@@ -1,7 +1,7 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
-def chunk_pages(pages: list[tuple[int, str]]) -> list[Document]:
+def chunk_pages(pages: list[tuple[int, str]], pdf_path: str) -> list[Document]:
     """
     Splits the text into chunks while preserving the page metadata.
     """
@@ -21,8 +21,7 @@ def chunk_pages(pages: list[tuple[int, str]]) -> list[Document]:
             # Create a LangChain Document object with text and metadata
             doc = Document(
                 page_content=chunk,
-                # TODO: Handle right source
-                metadata={"source": "board_game_manual.pdf", "page": page_num}
+                metadata={"source": pdf_path, "page": page_num}
             )
             all_chunks.append(doc)
 

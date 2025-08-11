@@ -1,35 +1,30 @@
-import os
 from langchain_cohere import CohereEmbeddings
-from langchain_community.vectorstores import FAISS
+from langchain_qdrant import Qdrant
+from qdrant_client import QdrantClient
 from langchain_core.documents import Document
+from src.config.config import COHERE_API_KEY, QDRANT_API_KEY, QDRANT_COLLECTION, QDRANT_URL
 
-def create_and_store_embeddings(chunks: list[Document]):
-    api_key = os.environ.get("COHERE_API_KEY")
-    if not api_key:
-        raise RuntimeError("COHERE_API_KEY non impostata")
-
-    print("Initializing Cohere embedding model...")
+# TODO: Update name and split code
+def store_in_qdrant(chunks: list[Document]):
     embeddings = CohereEmbeddings(
         model="embed-multilingual-v3.0",
-        cohere_api_key=api_key,
+        cohere_api_key=COHERE_API_KEY,
     )
 
-    print("Creating vector store with FAISS...")
-    vector_store = FAISS.from_documents(chunks, embeddings)
-    print("Vector store created successfully.")
+    client = QdrantClient(
+        url=QDRANT_URL,
+        api_key=QDRANT_API_KEY
+    )
 
-    embeddings_matrix = vector_store.index.reconstruct_n(0, len(vector_store.docstore._dict))
+    collection = QDRANT_COLLECTION
 
-    print("\n--- Vector Store Preview ---")
-    print(f"Totale documenti: {len(vector_store.docstore._dict)}\n")
-    for i, (doc_id, doc) in enumerate(vector_store.docstore._dict.items()):
-        print(f"ID: {doc_id}")
-        print(f"Pagina: {doc.metadata.get('page')}")
-        print(f"Sorgente: {doc.metadata.get('source')}")
-        print(f"Testo: {doc.page_content[:200]}...\n")
-        print(f"Embedding (prime 5 dimensioni): {embeddings_matrix[i][:5]}\n")
-        if i >= 2:
-            break
-    print("----------------------------\n")
-
-    return vector_store
+    # Will create the collection if it doesn't exist
+    vs = Qdrant.from_documents(
+        documents=chunks,
+        embedding=embeddings,
+        url=QDRANT_URL,
+        prefer_grpc=False,  # True if endpoint supports gRPC
+        api_key=QDRANT_API_KEY,
+        collection_name=collection,
+    )
+    return vs
