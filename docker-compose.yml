@@ -1,0 +1,11 @@
+services:
+  pdf-embedding-chunker:
+    container_name: pdf-embedding-chunker
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: bash
+    stdin_open: true
+    tty: true
