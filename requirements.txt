@@ -1,3 +1,13 @@
 python-dotenv
-pypdf
+
+langchain
+langchain-community
+langchain-core
 langchain-text-splitters
+
+langchain-cohere
+cohere
+
+faiss-cpu
+
+pymupdf
