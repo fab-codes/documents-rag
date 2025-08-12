@@ -1,8 +1,8 @@
 
 from src.chunk.chunk import chunk_pages
 from src.config.config import PDF_FILE_PATH
-from src.embedding.embedding import store_in_qdrant
 from src.pdf.utils import extract_pages_from_pdf
+from src.qdrant.qdrant import store
 
 def main():
     """
@@ -21,7 +21,7 @@ def main():
 
     docs = chunk_pages(extracted_pages, pdf_path)
 
-    store_in_qdrant(docs)
+    store(docs)
     
     print(f"3. Process complete. Created {len(docs)} chunks.")
     
