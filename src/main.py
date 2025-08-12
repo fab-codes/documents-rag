@@ -3,6 +3,7 @@ from src.chunk.chunk import chunk_pages
 from src.config.config import PDF_FILE_PATH
 from src.pdf.utils import extract_pages_from_pdf
 from src.qdrant.qdrant import store
+from src.rag.rag import create_rag_chain
 
 def main():
     """
@@ -21,13 +22,22 @@ def main():
 
     docs = chunk_pages(extracted_pages, pdf_path)
 
-    store(docs)
+    vector_store = store(docs)
+
+    rag_chain = create_rag_chain(vector_store)
     
     print(f"3. Process complete. Created {len(docs)} chunks.")
     
-    # Let's display the first two chunks for inspection
-    print("\n--- Content of the first chunk ---")
-    print(docs[0].page_content)  # .page_content contains the chunk's text
+    print("\n\n✅ RAG ready. Ask your questions! (write 'exit' to quit)\n")
+
+    while True:
+        question = input("> ")
+        if question.lower() == 'exit':
+            break
+        
+        # Invoke the RAG chain with the user's question
+        answer = rag_chain.invoke(question)
+        print("Answer:", answer, "\n")
 
 
 if __name__ == "__main__":

@@ -1,14 +1,15 @@
 python-dotenv
 
+pymupdf
+
 langchain
 langchain-community
 langchain-core
 langchain-text-splitters
-
+langchain-google-genai
 langchain-cohere
+langchain_qdrant
+
 cohere
 
-langchain_qdrant
 qdrant-client
-
-pymupdf

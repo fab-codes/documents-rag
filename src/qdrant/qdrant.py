@@ -7,7 +7,7 @@ def store(chunks: list[Document]):
     collection = QDRANT_COLLECTION
 
     # Will create the collection if it doesn't exist
-    vs = Qdrant.from_documents(
+    vector_store = Qdrant.from_documents(
         documents=chunks,
         embedding=embeddings,
         url=QDRANT_URL,
@@ -15,4 +15,4 @@ def store(chunks: list[Document]):
         api_key=QDRANT_API_KEY,
         collection_name=collection,
     )
-    return vs
+    return vector_store
