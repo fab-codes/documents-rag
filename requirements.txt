@@ -13,3 +13,5 @@ langchain_qdrant
 cohere
 
 qdrant-client
+
+tiktoken
