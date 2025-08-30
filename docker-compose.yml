@@ -1,6 +1,6 @@
 services:
-  pdf-embedding-chunker:
-    container_name: pdf-embedding-chunker
+  documents-rag:
+    container_name: documents-rag
     build: .
     env_file:
       - .env
@@ -10,8 +10,8 @@ services:
     stdin_open: true
     tty: true
 
-  pdf-embedding-chunker-qdrant:
-    container_name: pdf-embedding-chunker-qdrant
+  documents-rag-qdrant:
+    container_name: documents-rag-qdrant
     image: qdrant/qdrant:latest
     ports:
       - "6333:6333" # HTTP
