@@ -7,11 +7,11 @@ langchain-community
 langchain-core
 langchain-text-splitters
 langchain-google-genai
-langchain-cohere
 langchain_qdrant
-
-cohere
 
 qdrant-client
 
 tiktoken
+
+transformers
+sentence-transformers

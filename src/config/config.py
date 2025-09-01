@@ -6,8 +6,9 @@ load_dotenv()
 # FILES
 PDF_FILE_PATH = os.getenv("PDF_FILE_PATH")
 
-# COHERE
-COHERE_API_KEY = os.getenv("COHERE_API_KEY")
+# EMBEDDING
+EMBEDDING_MODEL_ID = os.getenv("EMBEDDING_MODEL_ID")
+CPU_OR_CUDA= os.getenv("CPU_OR_CUDA")
 
 # QDRANT
 QDRANT_URL = os.getenv("QDRANT_URL")
