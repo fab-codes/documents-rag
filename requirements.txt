@@ -2,16 +2,16 @@ python-dotenv
 
 pymupdf
 
+tiktoken
+
 langchain
-langchain-community
+langchain-huggingface
 langchain-core
 langchain-text-splitters
 langchain-google-genai
 langchain_qdrant
 
 qdrant-client
-
-tiktoken
 
 transformers
 sentence-transformers

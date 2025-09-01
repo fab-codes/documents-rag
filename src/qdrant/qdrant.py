@@ -1,4 +1,4 @@
-from langchain_qdrant import Qdrant
+from langchain_qdrant import QdrantVectorStore
 from langchain_core.documents import Document
 from src.config.config import QDRANT_API_KEY, QDRANT_COLLECTION, QDRANT_URL
 from src.embedding.embedding_setup import embeddings
@@ -8,7 +8,7 @@ def store(chunks: list[Document]):
     collection = QDRANT_COLLECTION
 
     # Will create the collection if it doesn't exist
-    vector_store = Qdrant.from_documents(
+    vector_store = QdrantVectorStore.from_documents(
         documents=chunks,
         embedding=embeddings,
         url=QDRANT_URL,
@@ -28,10 +28,10 @@ def get_existing_vector_store():
         prefer_grpc=False
     )
     
-    vector_store = Qdrant(
+    vector_store = QdrantVectorStore(
         client=client,
         collection_name=QDRANT_COLLECTION,
-        embeddings=embeddings,
+        embedding=embeddings,
     )
     print("✅ Connection successful.")
     return vector_store

@@ -1,4 +1,4 @@
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from src.config.config import CPU_OR_CUDA, EMBEDDING_MODEL_ID
 
 print("Loading local Sentence Transformer model (Qwen/Qwen3-Embedding-0.6B)...")
