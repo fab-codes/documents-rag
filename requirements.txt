@@ -5,13 +5,9 @@ pymupdf
 tiktoken
 
 langchain
-langchain-huggingface
 langchain-core
 langchain-text-splitters
 langchain-google-genai
 langchain_qdrant
 
 qdrant-client
-
-transformers
-sentence-transformers

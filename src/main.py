@@ -13,7 +13,7 @@ def main():
 
     vector_store = None
 
-    if(embed_file.lower == "y"):
+    if(embed_file.lower() == "y"):
         # --- SETUP PHASE (runs only once) ---
         pdf_path = PDF_FILE_PATH
 
